@@ -1,0 +1,19 @@
+time_steps: 250
+beta_schedule: "cosine" # One of ["cosine", "linear"]
+beta_schedule_params:
+    s: 0.008
+distributed: no
+multigpu: no
+diffusion_type: "categorical"
+
+backbone: "unet_openai"
+unet_openai:
+    base_channels: 64
+    channel_mult: [1, 1, 2, 2, 4, 4]
+    attention_resolutions: [32, 16, 8]
+    num_heads: 1
+    num_head_channels: 32
+    softmax_output: yes
+    ce_head: no
+    dropout: 0.0
+    use_fp16: no
