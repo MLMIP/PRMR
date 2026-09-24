@@ -109,7 +109,7 @@ def validate_args(args):
 def parse_args():
     parser = argparse.ArgumentParser(description="Run PRMR test-time adaptation.")
     parser.add_argument("--config", default=str(DEFAULT_CONFIG), help="test config file path")
-    parser.add_argument("--checkpoint", default=str(DEFAULT_CONFIG), help="segmentation checkpoint file")
+    parser.add_argument("--checkpoint", default=str(DEFAULT_CHECKPOINT), help="segmentation checkpoint file")
     parser.add_argument("--diffusion-params", default=str(DEFAULT_DIFFUSION_PARAMS))
     parser.add_argument("--diffusion-checkpoint", default=str(DEFAULT_DIFFUSION_CHECKPOINT))
     parser.add_argument("--gpu-id", default=None, help="CUDA_VISIBLE_DEVICES value")
