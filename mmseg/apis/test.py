@@ -107,7 +107,7 @@ def single_gpu_prmr(args,
                 'img': [data['img'][4] for i in range(1)]
             }
 
-            domain_weight, seg_logits_anchor = anchor_model.module.dmr(img=data_one['img'][0].cuda(),
+            domain_weight = anchor_model.module.dmr(img=data_one['img'][0].cuda(),
                                                                         img_metas=data_one['img_metas'][0], 
                                                                         weight={"ema_model":ema_model.module.state_dict(),
                                                                                 "model":model.state_dict(),
@@ -122,7 +122,7 @@ def single_gpu_prmr(args,
             # teacher output
             result, preds, seg_logits = ema_model(return_loss=False, **data)
             uncertainty = -np.sum(seg_logits * np.log(seg_logits + 1e-8), axis=0)
-            result = diffusion_model.dpr(seg_logits, seg_logits_anchor, uncertainty, result[0], args.time_step, args.threshold)
+            result = diffusion_model.dpr(seg_logits, uncertainty, result[0], args.time_step, args.threshold)
 
             _, prob_anchor, _= anchor_model(return_loss=False, **data_one)
             mask = (prob_anchor[0] > 0.69).astype(np.int64) # 0.74 was the 5% quantile for cityscapes, therefore we use 0.69 here
