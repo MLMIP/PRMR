@@ -38,14 +38,15 @@ Our code is based on [CoTTA](https://github.com/qinenergy/cotta), [SVDP](https:/
 ## Citation
 If you find our work is useful for your research, please consider citing:
 ```
-@article{hu_pseudo-label_2026,
-	title = {Pseudo-label Refinement and Model-State Recovery for Continual Test-Time Adaptation on Semantic Segmentation},
-	volume = {134},
-	number = {10},
-	journal = {International Journal of Computer Vision},
-	author = {Hu, Kai and Zhao, Zhihong and Zhang, Yuan and Gao, Xieping},
-	year = {2026},
-	pages = {448},
+@article{hu2026pseudo,
+  title={Pseudo-label Refinement and Model-State Recovery for Continual Test-Time Adaptation on Semantic Segmentation},
+  author={Hu, Kai and Zhao, Zhihong and Zhang, Yuan and Gao, Xieping},
+  journal={International Journal of Computer Vision},
+  volume={134},
+  number={10},
+  pages={448},
+  year={2026},
+  publisher={Springer}
 }
 ```
 
