@@ -1,5 +1,12 @@
 # Pseudo-label Refinement and Model-State Recovery for Continual Test-Time Adaptation on Semantic Segmentation
 
+## Introduction
+Official code for IJCV 2026 paper "[Pseudo-label Refinement and Model-State Recovery for Continual Test-Time Adaptation on Semantic Segmentation](https://doi.org/10.1007/s11263-026-03003-x)".
+<p align="center">
+  <img src="method.png" width="100%" alt="Overall Framework">
+</p>
+
+
 ## Environment setup
 ```
 conda create -n prmr python=3.8 -y
@@ -26,6 +33,20 @@ python3 tools/prmr.py
 
 
 ## Acknowledgement
+Our code is based on [CoTTA](https://github.com/qinenergy/cotta), [SVDP](https://github.com/Anonymous-012/SVDP) and [CCDM](https://github.com/LarsDoorenbos/ccdm-stochastic-segmentation). Thanks them for releasing their codes.
 
-Our code is based on CoTTA, SVDP and CCDM. Thanks them for releasing their codes.
+## Citation
+If you find our work is useful for your research, please consider citing:
+```
+@article{hu_pseudo-label_2026,
+	title = {Pseudo-label Refinement and Model-State Recovery for Continual Test-Time Adaptation on Semantic Segmentation},
+	volume = {134},
+	number = {10},
+	journal = {International Journal of Computer Vision},
+	author = {Hu, Kai and Zhao, Zhihong and Zhang, Yuan and Gao, Xieping},
+	year = {2026},
+	pages = {448},
+}
+```
+
 
