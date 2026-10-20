@@ -1,0 +1,520 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>init param>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+seed 42
+time_step 180
+threshold 0.9
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>over param>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Config (path: PRMR/local_configs/segformer/B5/segformer.b5.1024x1024.acdc.160k.py): {'norm_cfg': {'type': 'SyncBN', 'requires_grad': True}, 'find_unused_parameters': True, 'model': {'type': 'EncoderDecoder', 'pretrained': None, 'backbone': {'type': 'mit_b5', 'style': 'pytorch'}, 'decode_head': {'type': 'SegFormerHead', 'in_channels': [64, 128, 320, 512], 'in_index': [0, 1, 2, 3], 'feature_strides': [4, 8, 16, 32], 'channels': 128, 'dropout_ratio': 0.1, 'num_classes': 19, 'norm_cfg': {'type': 'SyncBN', 'requires_grad': True}, 'align_corners': False, 'decoder_params': {'embed_dim': 768}, 'loss_decode': {'type': 'CrossEntropyLoss', 'use_sigmoid': False, 'loss_weight': 1.0, 'reduction': 'none'}}, 'train_cfg': {}, 'test_cfg': {'mode': 'slide', 'crop_size': (1024, 1024), 'stride': (768, 768)}}, 'dataset_type': 'ACDCDataset', 'data_root': 'dataset/ACDC', 'img_norm_cfg': {'mean': [123.675, 116.28, 103.53], 'std': [58.395, 57.12, 57.375], 'to_rgb': True}, 'crop_size': (224, 224), 'train_pipeline': [{'type': 'LoadImageFromFile'}, {'type': 'LoadAnnotations'}, {'type': 'Resize', 'img_scale': (1920, 1080), 'ratio_range': (0.5, 2.0)}, {'type': 'RandomCrop', 'crop_size': (1024, 1024), 'cat_max_ratio': 0.75}, {'type': 'RandomFlip', 'prob': 0.5}, {'type': 'PhotoMetricDistortion'}, {'type': 'Normalize', 'mean': [123.675, 116.28, 103.53], 'std': [58.395, 57.12, 57.375], 'to_rgb': True}, {'type': 'Pad', 'size': (1024, 1024), 'pad_val': 0, 'seg_pad_val': 255}, {'type': 'DefaultFormatBundle'}, {'type': 'Collect', 'keys': ['img', 'gt_semantic_seg']}], 'test_pipeline': [{'type': 'LoadImageFromFile'}, {'type': 'MultiScaleFlipAug', 'img_scale': (960, 540), 'flip': False, 'transforms': [{'type': 'Resize', 'keep_ratio': True}, {'type': 'RandomFlip'}, {'type': 'Normalize', 'mean': [123.675, 116.28, 103.53], 'std': [58.395, 57.12, 57.375], 'to_rgb': True}, {'type': 'ImageToTensor', 'keys': ['img']}, {'type': 'Collect', 'keys': ['img']}]}], 'data': {'samples_per_gpu': 2, 'workers_per_gpu': 2, 'train': {'type': 'RepeatDataset', 'times': 500, 'dataset': {'type': 'ACDCDataset', 'data_root': 'dataset/ACDC', 'img_dir': 'leftImg8bit/train', 'ann_dir': 'gtFine/train', 'pipeline': [{'type': 'LoadImageFromFile'}, {'type': 'LoadAnnotations'}, {'type': 'Resize', 'img_scale': (1920, 1080), 'ratio_range': (0.5, 2.0)}, {'type': 'RandomCrop', 'crop_size': (1024, 1024), 'cat_max_ratio': 0.75}, {'type': 'RandomFlip', 'prob': 0.5}, {'type': 'PhotoMetricDistortion'}, {'type': 'Normalize', 'mean': [123.675, 116.28, 103.53], 'std': [58.395, 57.12, 57.375], 'to_rgb': True}, {'type': 'Pad', 'size': (1024, 1024), 'pad_val': 0, 'seg_pad_val': 255}, {'type': 'DefaultFormatBundle'}, {'type': 'Collect', 'keys': ['img', 'gt_semantic_seg']}]}}, 'val': {'type': 'ACDCDataset', 'data_root': 'dataset/ACDC', 'img_dir': 'rgb_anon/fog/train', 'ann_dir': 'gt/fog/train', 'pipeline': [{'type': 'LoadImageFromFile'}, {'type': 'MultiScaleFlipAug', 'img_scale': (960, 540), 'flip': False, 'transforms': [{'type': 'Resize', 'keep_ratio': True}, {'type': 'RandomFlip'}, {'type': 'Normalize', 'mean': [123.675, 116.28, 103.53], 'std': [58.395, 57.12, 57.375], 'to_rgb': True}, {'type': 'ImageToTensor', 'keys': ['img']}, {'type': 'Collect', 'keys': ['img']}]}]}, 'test': {'type': 'ACDCDataset', 'data_root': 'dataset/ACDC', 'img_dir': 'rgb_anon_trainvaltest/rgb_anon/fog/train', 'ann_dir': 'gt_trainval/gt/fog/train', 'pipeline': [{'type': 'LoadImageFromFile'}, {'type': 'MultiScaleFlipAug', 'img_scale': (960, 540), 'flip': True, 'transforms': [{'type': 'Resize', 'keep_ratio': True}, {'type': 'RandomFlip'}, {'type': 'Normalize', 'mean': [123.675, 116.28, 103.53], 'std': [58.395, 57.12, 57.375], 'to_rgb': True}, {'type': 'ImageToTensor', 'keys': ['img']}, {'type': 'Collect', 'keys': ['img']}], 'img_ratios': [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]}], 'test_mode': True}, 'test1': {'type': 'ACDCDataset', 'data_root': 'dataset/ACDC', 'img_dir': 'rgb_anon_trainvaltest/rgb_anon/night/train', 'ann_dir': 'gt_tra
+2026-04-13 08:07:54,194 - mmseg - INFO - Loaded 400 images
+2026-04-13 08:07:54,210 - mmseg - INFO - Loaded 400 images
+2026-04-13 08:07:54,228 - mmseg - INFO - Loaded 400 images
+2026-04-13 08:07:54,246 - mmseg - INFO - Loaded 400 images
+save ckpt to: PRMR/tools/ckpt_path/exp_20260413_080901
+load checkpoint from local path: PRMR/segformer.b5.1024x1024.city.160k.pth
+revisiting 0
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.0 task/s, elapsed: 10802s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 94.48 | 99.36 |
+| sidewalk      | 67.25 | 75.07 |
+| building      | 80.76 | 97.18 |
+| wall          | 57.95 | 69.19 |
+| fence         | 26.34 | 28.17 |
+| pole          | 51.44 | 60.14 |
+| traffic light | 44.36 | 49.3  |
+| traffic sign  | 73.33 | 90.58 |
+| vegetation    | 87.59 | 92.22 |
+| terrain       | 70.99 | 87.69 |
+| sky           | 97.93 | 99.02 |
+| person        | 67.97 | 81.57 |
+| rider         | 71.8  | 89.07 |
+| car           | 87.88 | 95.66 |
+| truck         | 77.86 | 81.39 |
+| bus           | 92.96 | 96.59 |
+| train         | 89.64 | 96.48 |
+| motorcycle    | 59.81 | 67.75 |
+| bicycle       | 68.64 | 87.64 |
++---------------+-------+-------+
+Summary:
+
++--------+-------+-------+------+
+| Scope  | mIoU  | mAcc  | aAcc |
++--------+-------+-------+------+
+| global | 72.05 | 81.27 | 94.1 |
++--------+-------+-------+------+
+1
+[                                                  ] 2/400, 0.0 task/s, elapsed: 60s, ETA: 11861s
+------ New domain detected ------
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.0 task/s, elapsed: 11538s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 91.88 | 98.69 |
+| sidewalk      | 64.78 | 72.5  |
+| building      | 70.28 | 87.56 |
+| wall          | 36.62 | 47.58 |
+| fence         | 27.13 | 31.65 |
+| pole          | 49.32 | 60.54 |
+| traffic light | 48.3  | 61.64 |
+| traffic sign  | 44.89 | 49.58 |
+| vegetation    | 40.43 | 88.04 |
+| terrain       | 26.54 | 65.75 |
+| sky           | 2.14  | 2.14  |
+| person        | 54.01 | 76.4  |
+| rider         | 44.28 | 54.35 |
+| car           | 78.22 | 90.78 |
+| truck         | 20.26 | 61.0  |
+| bus           | 39.46 | 40.4  |
+| train         | 57.85 | 61.45 |
+| motorcycle    | 31.01 | 34.22 |
+| bicycle       | 37.38 | 43.65 |
++---------------+-------+-------+
+Summary:
+
++--------+-------+-------+-------+
+| Scope  | mIoU  | mAcc  | aAcc  |
++--------+-------+-------+-------+
+| global | 45.51 | 59.36 | 73.93 |
++--------+-------+-------+-------+
+1
+[                                                  ] 2/400, 0.0 task/s, elapsed: 70s, ETA: 13845s
+------ Domain switch: 1 -> 0 ------
+
+[>>>>>>>>>                                         ] 73/400, 0.0 task/s, elapsed: 1991s, ETA:  8919s
+------ New domain detected ------
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.0 task/s, elapsed: 11104s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 86.74 | 96.67 |
+| sidewalk      | 57.9  | 63.18 |
+| building      | 91.46 | 97.06 |
+| wall          | 44.61 | 60.36 |
+| fence         | 33.46 | 41.54 |
+| pole          | 58.6  | 69.47 |
+| traffic light | 70.22 | 76.71 |
+| traffic sign  | 70.19 | 81.9  |
+| vegetation    | 90.96 | 95.08 |
+| terrain       | 59.46 | 89.07 |
+| sky           | 98.2  | 98.74 |
+| person        | 57.49 | 72.42 |
+| rider         | 65.03 | 80.47 |
+| car           | 82.89 | 91.22 |
+| truck         | 30.96 | 56.41 |
+| bus           | 78.87 | 81.39 |
+| train         | 70.72 | 91.97 |
+| motorcycle    | 55.33 | 68.7  |
+| bicycle       | 60.59 | 81.65 |
++---------------+-------+-------+
+Summary:
+
++--------+-------+-------+-------+
+| Scope  | mIoU  | mAcc  | aAcc  |
++--------+-------+-------+-------+
+| global | 66.51 | 78.63 | 93.15 |
++--------+-------+-------+-------+
+1
+[                                                  ] 7/400, 0.0 task/s, elapsed: 185s, ETA: 10379s
+------ Domain switch: 2 -> 0 ------
+
+[>                                                 ] 11/400, 0.0 task/s, elapsed: 304s, ETA: 10733s
+------ Domain switch: 0 -> 2 ------
+
+[>>                                                ] 18/400, 0.0 task/s, elapsed: 474s, ETA: 10060s
+------ Domain switch: 2 -> 0 ------
+
+[>>                                                ] 21/400, 0.0 task/s, elapsed: 547s, ETA:  9871s
+------ Domain switch: 0 -> 2 ------
+
+[>>>>>>                                            ] 53/400, 0.0 task/s, elapsed: 1348s, ETA:  8829s
+------ Domain switch: 2 -> 0 ------
+
+[>>>>>>>                                           ] 56/400, 0.0 task/s, elapsed: 1470s, ETA:  9032s
+------ Domain switch: 0 -> 2 ------
+
+[>>>>>>>>                                          ] 67/400, 0.0 task/s, elapsed: 1758s, ETA:  8738s
+------ Domain switch: 2 -> 0 ------
+
+[>>>>>>>>>                                         ] 72/400, 0.0 task/s, elapsed: 1904s, ETA:  8674s
+------ Domain switch: 0 -> 2 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.0 task/s, elapsed: 10354s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 84.66 | 97.91 |
+| sidewalk      | 52.82 | 64.66 |
+| building      | 89.19 | 97.45 |
+| wall          | 51.69 | 61.69 |
+| fence         | 49.57 | 53.92 |
+| pole          | 63.92 | 73.06 |
+| traffic light | 76.6  | 83.86 |
+| traffic sign  | 72.41 | 82.46 |
+| vegetation    | 85.38 | 89.49 |
+| terrain       | 4.98  | 5.68  |
+| sky           | 97.8  | 98.69 |
+| person        | 68.57 | 86.58 |
+| rider         | 50.77 | 80.49 |
+| car           | 86.12 | 95.61 |
+| truck         | 57.33 | 66.3  |
+| bus           | 65.8  | 81.09 |
+| train         | 86.32 | 91.18 |
+| motorcycle    | 27.24 | 29.97 |
+| bicycle       | 53.91 | 75.46 |
++---------------+-------+-------+
+Summary:
+
++--------+-------+------+-------+
+| Scope  | mIoU  | mAcc | aAcc  |
++--------+-------+------+-------+
+| global | 64.48 | 74.5 | 91.99 |
++--------+-------+------+-------+
+1
+revisiting 1
+[                                                  ] 2/400, 0.0 task/s, elapsed: 59s, ETA: 11684s
+------ Domain switch: 2 -> 0 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>            ] 305/400, 0.0 task/s, elapsed: 6261s, ETA:  1950s
+------ Domain switch: 0 -> 2 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>          ] 321/400, 0.0 task/s, elapsed: 6502s, ETA:  1600s
+------ Domain switch: 2 -> 0 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>          ] 324/400, 0.0 task/s, elapsed: 6550s, ETA:  1536s
+------ Domain switch: 0 -> 2 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 348/400, 0.1 task/s, elapsed: 6944s, ETA:  1038s
+------ Domain switch: 2 -> 0 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>      ] 355/400, 0.1 task/s, elapsed: 7085s, ETA:   898s
+------ Domain switch: 0 -> 2 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 391/400, 0.1 task/s, elapsed: 7671s, ETA:   177s
+------ Domain switch: 2 -> 0 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.1 task/s, elapsed: 7887s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 94.83 | 99.42 |
+| sidewalk      | 69.33 | 77.31 |
+| building      | 81.32 | 97.21 |
+| wall          | 57.96 | 68.4  |
+| fence         | 29.75 | 31.56 |
+| pole          | 53.26 | 61.92 |
+| traffic light | 46.16 | 51.21 |
+| traffic sign  | 74.23 | 91.06 |
+| vegetation    | 88.33 | 92.81 |
+| terrain       | 72.1  | 88.41 |
+| sky           | 98.19 | 99.09 |
+| person        | 68.56 | 83.94 |
+| rider         | 73.28 | 85.82 |
+| car           | 87.16 | 95.01 |
+| truck         | 78.19 | 83.06 |
+| bus           | 93.07 | 96.47 |
+| train         | 89.42 | 95.47 |
+| motorcycle    | 64.65 | 73.84 |
+| bicycle       | 70.45 | 88.11 |
++---------------+-------+-------+
+Summary:
+
++--------+-------+-------+-------+
+| Scope  | mIoU  | mAcc  | aAcc  |
++--------+-------+-------+-------+
+| global | 73.17 | 82.11 | 94.42 |
++--------+-------+-------+-------+
+1
+[                                                  ] 2/400, 0.0 task/s, elapsed: 51s, ETA: 10120s
+------ Domain switch: 0 -> 1 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.1 task/s, elapsed: 7395s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 93.1  | 98.67 |
+| sidewalk      | 69.38 | 77.81 |
+| building      | 75.54 | 86.27 |
+| wall          | 40.71 | 52.99 |
+| fence         | 28.1  | 32.03 |
+| pole          | 51.97 | 64.44 |
+| traffic light | 51.02 | 64.03 |
+| traffic sign  | 48.43 | 53.87 |
+| vegetation    | 38.15 | 89.44 |
+| terrain       | 27.73 | 66.28 |
+| sky           | 0.76  | 0.76  |
+| person        | 53.81 | 76.89 |
+| rider         | 45.35 | 56.6  |
+| car           | 79.37 | 92.96 |
+| truck         | 22.6  | 48.23 |
+| bus           | 40.32 | 41.06 |
+| train         | 72.05 | 76.88 |
+| motorcycle    | 32.08 | 34.66 |
+| bicycle       | 38.93 | 45.58 |
++---------------+-------+-------+
+Summary:
+
++--------+-------+-------+-------+
+| Scope  | mIoU  | mAcc  | aAcc  |
++--------+-------+-------+-------+
+| global | 47.86 | 61.02 | 74.42 |
++--------+-------+-------+-------+
+1
+[                                                  ] 2/400, 0.1 task/s, elapsed: 29s, ETA:  5681s
+------ Domain switch: 1 -> 0 ------
+
+[                                                  ] 5/400, 0.1 task/s, elapsed: 82s, ETA:  6476s
+------ Domain switch: 0 -> 2 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.1 task/s, elapsed: 6806s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 88.1  | 97.92 |
+| sidewalk      | 62.37 | 68.88 |
+| building      | 92.03 | 97.02 |
+| wall          | 48.97 | 63.77 |
+| fence         | 32.46 | 36.26 |
+| pole          | 60.53 | 72.17 |
+| traffic light | 70.45 | 76.79 |
+| traffic sign  | 71.39 | 81.49 |
+| vegetation    | 91.3  | 95.42 |
+| terrain       | 62.65 | 87.45 |
+| sky           | 98.2  | 98.66 |
+| person        | 57.79 | 73.67 |
+| rider         | 65.76 | 79.19 |
+| car           | 83.59 | 91.83 |
+| truck         | 37.06 | 62.62 |
+| bus           | 80.98 | 82.6  |
+| train         | 78.18 | 92.17 |
+| motorcycle    | 54.22 | 65.05 |
+| bicycle       | 64.1  | 80.55 |
++---------------+-------+-------+
+Summary:
+
++--------+-------+-------+-------+
+| Scope  | mIoU  | mAcc  | aAcc  |
++--------+-------+-------+-------+
+| global | 68.43 | 79.13 | 93.72 |
++--------+-------+-------+-------+
+1
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.0 task/s, elapsed: 9250s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 85.84 | 97.93 |
+| sidewalk      | 55.2  | 68.54 |
+| building      | 89.15 | 97.16 |
+| wall          | 53.76 | 64.18 |
+| fence         | 45.31 | 48.25 |
+| pole          | 64.13 | 73.56 |
+| traffic light | 76.46 | 83.77 |
+| traffic sign  | 72.96 | 82.38 |
+| vegetation    | 85.45 | 89.85 |
+| terrain       | 4.0   | 4.42  |
+| sky           | 97.81 | 98.82 |
+| person        | 67.83 | 86.7  |
+| rider         | 51.73 | 79.59 |
+| car           | 85.54 | 95.45 |
+| truck         | 53.11 | 60.93 |
+| bus           | 68.62 | 83.77 |
+| train         | 88.56 | 91.32 |
+| motorcycle    | 25.96 | 27.66 |
+| bicycle       | 57.86 | 76.55 |
++---------------+-------+-------+
+Summary:
+
++--------+------+-------+-------+
+| Scope  | mIoU | mAcc  | aAcc  |
++--------+------+-------+-------+
+| global | 64.7 | 74.25 | 92.16 |
++--------+------+-------+-------+
+1
+revisiting 2
+[                                                  ] 2/400, 0.1 task/s, elapsed: 38s, ETA:  7583s
+------ Domain switch: 2 -> 0 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>            ] 305/400, 0.1 task/s, elapsed: 5695s, ETA:  1774s
+------ Domain switch: 0 -> 2 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>      ] 352/400, 0.1 task/s, elapsed: 6700s, ETA:   914s
+------ Domain switch: 2 -> 0 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>      ] 355/400, 0.1 task/s, elapsed: 6757s, ETA:   857s
+------ Domain switch: 0 -> 2 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 396/400, 0.1 task/s, elapsed: 7625s, ETA:    77s
+------ Domain switch: 2 -> 0 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.1 task/s, elapsed: 7720s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 94.86 | 99.41 |
+| sidewalk      | 69.37 | 77.91 |
+| building      | 80.83 | 97.18 |
+| wall          | 58.29 | 66.6  |
+| fence         | 29.75 | 31.55 |
+| pole          | 53.54 | 62.14 |
+| traffic light | 46.17 | 51.36 |
+| traffic sign  | 74.29 | 91.23 |
+| vegetation    | 88.45 | 92.9  |
+| terrain       | 72.67 | 88.77 |
+| sky           | 98.25 | 99.11 |
+| person        | 66.84 | 83.17 |
+| rider         | 70.37 | 82.54 |
+| car           | 86.53 | 94.7  |
+| truck         | 77.86 | 83.08 |
+| bus           | 93.13 | 96.14 |
+| train         | 89.91 | 95.12 |
+| motorcycle    | 63.88 | 72.02 |
+| bicycle       | 70.14 | 86.15 |
++---------------+-------+-------+
+Summary:
+
++--------+------+-------+-------+
+| Scope  | mIoU | mAcc  | aAcc  |
++--------+------+-------+-------+
+| global | 72.9 | 81.64 | 94.43 |
++--------+------+-------+-------+
+1
+[                                                  ] 2/400, 0.0 task/s, elapsed: 41s, ETA:  8147s
+------ Domain switch: 0 -> 1 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.0 task/s, elapsed: 8229s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 93.76 | 98.61 |
+| sidewalk      | 71.6  | 80.84 |
+| building      | 77.69 | 85.68 |
+| wall          | 42.39 | 55.45 |
+| fence         | 27.79 | 31.09 |
+| pole          | 52.95 | 66.07 |
+| traffic light | 52.24 | 65.01 |
+| traffic sign  | 50.62 | 56.78 |
+| vegetation    | 37.43 | 90.16 |
+| terrain       | 29.08 | 66.17 |
+| sky           | 0.26  | 0.26  |
+| person        | 54.44 | 78.18 |
+| rider         | 47.04 | 57.98 |
+| car           | 79.82 | 93.92 |
+| truck         | 25.33 | 40.93 |
+| bus           | 31.4  | 31.73 |
+| train         | 70.81 | 80.37 |
+| motorcycle    | 31.81 | 34.15 |
+| bicycle       | 39.46 | 45.68 |
++---------------+-------+-------+
+Summary:
+
++--------+-------+------+-------+
+| Scope  | mIoU  | mAcc | aAcc  |
++--------+-------+------+-------+
+| global | 48.21 | 61.0 | 74.64 |
++--------+-------+------+-------+
+1
+[                                                  ] 2/400, 0.0 task/s, elapsed: 46s, ETA:  9158s
+------ Domain switch: 1 -> 0 ------
+
+[                                                  ] 6/400, 0.0 task/s, elapsed: 166s, ETA: 10918s
+------ Domain switch: 0 -> 2 ------
+
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.0 task/s, elapsed: 8627s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 88.51 | 98.04 |
+| sidewalk      | 63.91 | 71.92 |
+| building      | 92.05 | 96.76 |
+| wall          | 48.95 | 62.86 |
+| fence         | 31.44 | 34.16 |
+| pole          | 61.46 | 73.56 |
+| traffic light | 70.54 | 76.97 |
+| traffic sign  | 71.06 | 81.62 |
+| vegetation    | 91.21 | 95.64 |
+| terrain       | 63.0  | 84.02 |
+| sky           | 98.23 | 98.68 |
+| person        | 56.72 | 74.73 |
+| rider         | 66.24 | 79.94 |
+| car           | 84.24 | 92.22 |
+| truck         | 42.65 | 60.53 |
+| bus           | 81.28 | 82.73 |
+| train         | 78.68 | 90.99 |
+| motorcycle    | 52.16 | 60.3  |
+| bicycle       | 62.83 | 77.01 |
++---------------+-------+-------+
+Summary:
+
++--------+-------+-------+-------+
+| Scope  | mIoU  | mAcc  | aAcc  |
++--------+-------+-------+-------+
+| global | 68.69 | 78.56 | 93.84 |
++--------+-------+-------+-------+
+1
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 400/400, 0.0 task/s, elapsed: 12220s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++---------------+-------+-------+
+| Class         | IoU   | Acc   |
++---------------+-------+-------+
+| road          | 86.52 | 97.7  |
+| sidewalk      | 56.72 | 71.26 |
+| building      | 89.04 | 97.05 |
+| wall          | 54.17 | 64.7  |
+| fence         | 44.73 | 47.76 |
+| pole          | 64.13 | 74.03 |
+| traffic light | 76.16 | 83.68 |
+| traffic sign  | 72.12 | 82.74 |
+| vegetation    | 85.37 | 89.77 |
+| terrain       | 3.87  | 4.24  |
+| sky           | 97.8  | 98.88 |
+| person        | 68.0  | 87.35 |
+| rider         | 52.2  | 75.1  |
+| car           | 85.58 | 94.98 |
+| truck         | 51.69 | 59.41 |
+| bus           | 67.31 | 83.63 |
+| train         | 86.61 | 88.36 |
+| motorcycle    | 23.54 | 24.51 |
+| bicycle       | 58.93 | 73.37 |
++---------------+-------+-------+
+Summary:
+
++--------+-------+-------+-------+
+| Scope  | mIoU  | mAcc  | aAcc  |
++--------+-------+-------+-------+
+| global | 64.45 | 73.61 | 92.23 |
++--------+-------+-------+-------+
+1
