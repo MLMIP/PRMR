@@ -20,17 +20,17 @@ def configure_visible_devices():
 
 configure_visible_devices()
 
-import mmcv  # noqa: E402
-import numpy as np  # noqa: E402
-import torch  # noqa: E402
-import wandb  # noqa: E402
-from diffusion_model import DiffusionModel  # noqa: E402
-from mmcv.parallel import MMDataParallel  # noqa: E402
-from mmcv.runner import get_dist_info, init_dist, load_checkpoint  # noqa: E402
-from mmcv.utils import DictAction  # noqa: E402
-from mmseg.apis import single_gpu_prmr  # noqa: E402
-from mmseg.datasets import build_dataloader, build_dataset  # noqa: E402
-from mmseg.models import build_segmentor  # noqa: E402
+import mmcv
+import numpy as np
+import torch
+import wandb
+from diffusion_model import DiffusionModel
+from mmcv.parallel import MMDataParallel
+from mmcv.runner import get_dist_info, init_dist, load_checkpoint
+from mmcv.utils import DictAction
+from mmseg.apis import single_gpu_prmr
+from mmseg.datasets import build_dataloader, build_dataset
+from mmseg.models import build_segmentor
 
 
 DEFAULT_CONFIG = (
