@@ -153,7 +153,6 @@ class DiffusionModel:
     def dpr(
         self,
         seg_logits,
-        seg_logits_anchor,
         uncertainty,
         result,
         time_step=180,
